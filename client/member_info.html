@@ -1,0 +1,28 @@
+<template name="member_info">
+	<div class="container">
+		<div class="row">
+			<div class="span6">
+				<div class="well">
+					<h4>Skills</h4>
+					{{#each meteor_users}} 
+						{{#if profile.skills}}
+							<h6>{{profile.name}}</h6>
+							{{>user_array_as_labels arrayname="skills" user=this}}
+						{{/if}}
+					{{/each}}
+				</div>
+			</div>
+			<div class="span6">
+				<div class="well">
+					<h4>Games</h4>
+					{{#each meteor_users}} 
+						{{#if profile.games}}
+							<h6>{{profile.name}}</h6>
+							{{>user_array_as_labels arrayname="games" user=this}}
+						{{/if}}
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

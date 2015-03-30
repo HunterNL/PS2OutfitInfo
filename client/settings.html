@@ -1,0 +1,83 @@
+<template name="settings">
+	<div class="container">
+		<div class="row">
+			<div class="span6">
+				<div class="well">
+					<h4>Edit profile</h4>
+					{{>text_update_field id="name" printname="Nickname"}}
+					{{>text_update_field id="ps2_id" printname="PS2 ID" isNumber=true}}
+					{{>text_update_field id="ts3_id" printname="TS3 ID"}}
+					{{>update_checkbox id="interested_in_leading" printname="Interested in leading?"}}
+					{{>update_checkbox id="interested_in_comp_play" printname="Interested in competative play?"}}
+				</div>
+				
+				<div class="well">
+					{{>user_all_character_data}}
+				</div>
+				
+				<div class="well">
+					<p>Think you can help the outfit out with your skills or hobbies? Let us know!</p>
+					{{>user_array_append_button arrayname="skills" placeholder="Video Editing"}}
+					{{>user_array_as_labels arrayname="skills" user=currentUser}}
+				</div>
+			</div>
+			<div class="span6">
+				<div class="well">
+					{{#if emails}}
+						<h4>Manage Email</h4>
+						{{#each emails}}
+							{{>email_field}}
+						{{/each}}
+					{{/if}}	
+					{{>change_password_form}}
+					{{>errormsg}}
+					
+					<a class="btn btn-danger" role="button" href="#hidden_modal" data-toggle="modal">Delete Account</a>
+				</div>
+				
+				<div class="well">
+					<p>Show off what games you play and find others!</p>
+					{{>user_array_append_button arrayname="games" placeholder="Big rigs: Over the road racing"}}
+					{{>user_array_as_labels arrayname="games" user=currentUser}}
+				</div>
+			</div>
+		</div>
+	</div>
+	{{>hidden_modal}}
+</template>
+
+<template name="hidden_modal">
+	<div id="hidden_modal" class="modal hide fade" tabindex=-1 role="dialog">
+		<div class="modal-body">
+			<h3>You are about to delete your CMES account, are you sure?</h3>
+			<button class="btn" data-dismiss="modal">No,take me back</button>
+			<button class="btn btn-danger pull-right" id="remove_account_button" data-dismiss="modal">Yes I'm sure</button>
+		</div>
+	</div>
+</template>
+
+<template name="ps2_char_info">
+	<P>Planetside name: {{name}} BR {{br}}</p>
+</template>
+
+<template name="ts3_id_info">
+	<p>Teamspeak name: {{name}}</p>
+</template>
+
+<template name="user_all_character_data">
+	{{>ps2_char_info ps_char}}
+	{{>ts3_id_info ts_id}}
+</template>
+
+<template name="user_array_append_button">
+	<form>
+		<div class="input-append">
+		<input type="text" placeholder={{placeholder}}><button class="btn btn-primary">Add</button>
+		</div>
+	</form>
+</template>
+
+
+<template name="member_info_label"> 
+	<label class="label label-info">{{this}}{{#if should_show_close ..}}<i class="icon-remove icon-white"></i>{{/if}}</label>
+</template>

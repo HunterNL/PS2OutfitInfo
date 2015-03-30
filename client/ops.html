@@ -1,0 +1,43 @@
+<template name="ops">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="well">
+					<h4>Next ops</h4>
+					{{#if isOpsDay}}
+						<h1>Ops day!</h1>
+						<p>Ops in {{niceTimeTill getOpsTime}}</p>
+					{{else}}
+						<h1>No ops day :(</h1>
+					{{/if}}
+					
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<div class="well">
+					<h4>Upcoming operations:</h4>
+					<ul>
+					<li>OpsMoment</li>
+					<li>{{opsMoment 0 18}}</li>
+					<li>{{opsMoment 2 18}}</li>
+					<li>{{opsMoment 3 18}}</li>
+					<li>{{opsMoment 5 18}}</li>
+					<li><hr></li>
+					<li>TileTillDayHour</li>
+					
+					
+					<li>{{timeTillDayHour 0 18}}</li>
+					<li>{{timeTillDayHour 2 18}}</li>
+					<li>{{timeTillDayHour 3 18}}</li>
+					<li>{{timeTillDayHour 5 18}}</li>
+					
+					
+					
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,35 @@
+<template name="itemtable">
+	<div class="container table-responsive">
+		<table class="table table-condensed table-bordered">
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Rank </td>
+					{{#each itemset}}
+						<td title={{desc}}><p>{{name}}</p></td>
+					{{/each}}
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#each players}}
+					{{> player_items}}
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
+
+<template name="player_items">
+	<tr>
+		<td>{{name}}</td>
+		<td>{{br}}</td>
+		{{#each itemset}}
+			{{> itemset_cell}}
+		{{/each}}
+	</tr>
+</template>
+
+<template name="itemset_cell">
+	<td class="item_cell {{cell_class ..}}" title={{desc}}></td>
+</template>

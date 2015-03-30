@@ -1,0 +1,50 @@
+<template name="playertable">
+	
+	<div class="container table-responsive">
+		<table class="table table-condensed table-bordered">
+			<thead>
+				<tr>
+					<td rowspan="2" data-sortby="online_status" title="Online status"></td>
+					<td rowspan="2" data-sortby="name">Name</td>
+					<td colspan="2">Rank </td>
+					<td colspan="2">Days Since</td>
+				</tr>
+				<tr>
+					<td data-sortby="br">BR</td>
+					<td data-sortby="ranknum">Oufit</td>
+					<td data-sortby="last_online">Login</td>
+					<td data-sortby="joindate">Join</td>
+					<td>TS Login</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#each players}}
+					{{> player}}
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
+
+<template name="player">
+	<tr class={{row_class}}>
+		<td class={{indicator_class}}></td>
+		<td class={{name_class}}>
+			{{#if account}}
+				<b>{{name}}</b>
+			{{else}}
+				{{name}}
+			{{/if}}
+		</td>
+		<td>{{br}} </td>
+		<td>{{rank}} </td>
+		<td>{{days_since_login}}</td>
+		<td>{{days_since_join}}</td>
+		<td>
+			{{#with account}}
+				{{account_days_since_ts_login}}
+			{{/with}}
+		</td>
+	</tr>
+</template>

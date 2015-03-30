@@ -1,0 +1,156 @@
+<head>
+  <title>CMES 2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<template name="masterlayout">
+	{{>navbar}}
+	{{>yield}}
+</template>
+
+<template name="home">
+	<!--{{>playertableinfo}}-->
+	{{>playertable}}
+</template>
+
+<template name="items"> 
+	{{>itemtable}}
+</template>
+
+
+<template name="playertableinfo">
+	<div class="container">
+		<p>
+			Data is <span class={{dateclass}}>actual</span> and contains <span>{{count}}</span> entries 
+		</p>
+	</div>
+</template>
+
+
+<template name="navbar">
+	<nav class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" href="/" title="Consortium Member Equipment Statistics">CMES</a>
+			<ul class="nav">
+				<li><a href="/">Home</a></li>
+				<li><a href="items">Items</a></li>
+				<li><a href="teamspeak">TS3</a></li>
+				<li><a href="member_info">Member info</a></li>
+				<li><a href="ops">Ops</a></li>
+			</ul>
+			<ul class="nav pull-right">
+				{{#if currentUser}}
+					<li><a href="settings">{{currentUser.profile.name}}</a></li>
+					<li><button class="btn navbar-right btn-danger" id="logout_button">Log out</button></li>
+				{{else}}
+					{{#if loggingIn}}
+						<li><p>Logging in...</p></li>
+					{{else}}
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Log in<b class="caret"></b></a>
+							<div class="dropdown-menu">
+								{{>login_form}}
+							</div>
+						</li>
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Register<b class="caret"></b></a>
+							<div class="dropdown-menu">
+								{{>register_form}}
+							</div>
+						</li>
+					{{/if}}
+				{{/if}}
+			</ul>
+		</div>
+	</nav>
+</template>
+
+<template name="login_form"> 
+	<form style="padding-left:5px;padding-right:5px;margin-bottom:5px;">
+		{{>username_pw_fields}}
+		<button class="btn btn-primary btn-block" id="login_button">Log in</button>
+		<button class="btn btn-block" id="forgot_password_button">Forgot password?</button>
+		{{>errormsg}}
+		<span class="help-block">Make a CMES account, do not use your PS2 login!</span>
+	</form>
+</template>
+
+<template name="errormsg">
+	{{#if msg}}
+	<div class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{msg}}
+	</div>
+	{{/if}}
+</template>
+
+<template name="register_form">
+	<form style="padding-left:5px;padding-right:5px;margin-bottom:5px;">
+		{{>username_pw_fields}}
+		<button class="btn btn-primary btn-block">Register</button>
+		
+	</form>
+</template>
+
+<template name="pw_email_fields"> 
+	<!--<label>E-mail</label>
+	<input type="text" id="email" placeholder="example@example.com" required> -->
+	<label>Password</label>
+	<input type="password" id="password" required>
+</template>
+
+<template name="username_pw_fields"> 
+	<label>Username</label>
+	<input type="text" id="username" placeholder="Karma" required> 
+	<label>Password</label>
+	<input type="password" id="password" required>
+</template>
+
+
+<template name="change_password_form">
+	<h4>Change password</h4>
+	<form>
+		<label>Current password</label>
+		<input type="password" id="old_password">
+		<label>New password</label>
+		<input type="password" id="new_password">
+		<label>Repeat new password</label>
+		<input type="password" id="new_password_repeat">
+		<button class="btn" id="change_password_button">Change password</button>
+	</form>
+</template>
+
+<template name="email_field">
+	<div class="input-append">
+		<input type="text" disabled="true" value={{address}}>
+		{{#if verified}}
+			<span class="add-on"><i class="icon-ok"></i></span>
+		{{else}}
+			<button class="btn btn-warning">Verify?</button>
+		{{/if}}
+	</div>
+</template>
+
+<template name="update_checkbox"> 
+	<label class="checkbox">
+	<input type="checkbox" checked={{checked}}>{{printname}}
+	</label>
+</template>
+
+<template name="text_update_field">
+	<label>{{printname}}</label>
+	<div class="input-append">
+		<input type="text" value={{fieldvalue}}>
+		<button class="btn btn-primary" >Update</button>
+	</div>
+</template>
+
+
+<template name="user_array_as_labels">
+	{{#each user_array}}
+		{{>member_info_label}}
+	{{/each}}
+
+</template>
+
