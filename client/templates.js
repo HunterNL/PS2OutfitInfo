@@ -365,39 +365,7 @@ Template.user_array_as_labels.events({
 	}
 });
 
-Template.member_info_label.events({
-	"click .btn" : function(e,tmp) {
-		e.preventDefault();
-		e.stopPropagation();
-		Meteor.call("userAddSkill",tmp.find("input").value);
-	}
-});
-/*
-Template.member_info_label.events({
-	"click i" : function(e,tmp) {
-		//console.log(this,e,tmp)
-		e.preventDefault()
-		e.stopPropagation()
-		console.log("removing ",tmp.data)
-		Meteor.call("userRemoveSkill",tmp.data)
-	}
-})
-*/
-
-Template.member_info.meteor_users = function (){
-	return Meteor.users.find();
-};
-
-Template.member_info_label.should_show_close = function(parent) {
-	return parent.user._id == Meteor.userId();
-};
-
-
-Template.playertable.rendered = function() {
-	//$("thead td[data-sortby]").append("<i class=\"icon-resize-vertical pull-right\"></i>")
-
-};
-
+//Adds to profile array
 Template.user_array_append_button.events({
 	"click button" : function(e,tmp) {
 		e.preventDefault();
@@ -405,3 +373,20 @@ Template.user_array_append_button.events({
 		Meteor.call("userAppendProfileArray",this.arrayname,tmp.find("input").value);
 	}
 });
+
+//Removes from profile array
+Template.member_info_label.events({
+	"click .btn" : function(e,tmp) {
+		e.preventDefault();
+		e.stopPropagation();
+		Meteor.call("userAppendProfileArray","skills",tmp.find("input").value);
+	}
+});
+
+Template.member_info_label.should_show_close = function(parent) {
+	return parent.user._id == Meteor.userId();
+};
+
+Template.member_info.meteor_users = function (){
+	return Meteor.users.find();
+};

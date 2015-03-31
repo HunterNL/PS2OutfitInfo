@@ -164,6 +164,9 @@ function updatePS2ItemData() {
 function updateTSClientData() {
   console.log("Requesting TS3 Client Data");
   var request = HTTP.get(ts3_url);
+  if(!request.data || !request.data.players) {
+      throw new Meteor.Error("ts3_connection_error","Did not get TS3 data from HP script",request);
+  }
 
   request.data.players.forEach(function(entry) {
     var id = entry.id;
