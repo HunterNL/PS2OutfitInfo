@@ -83,6 +83,12 @@ Meteor.methods({
 		});
 	},
 
+	removeUser : function() {
+		if (this.userId) {
+			Meteor.users.remove(this.userId);
+		}
+	},
+
 	populateItemsets : function() {
 		if(ItemSets.find({}).count() === 0) {
 			ItemSets.insert({
