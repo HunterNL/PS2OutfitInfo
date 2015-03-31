@@ -346,9 +346,11 @@ Template.ps2_char_info.name = function() {
 };
 
 Template.ts3_id_info.name = function() {
-	var ts_id = TSClients.findOne(Meteor.user().profile.ts3_id);
-	if (ts_id) {
-		return ts_id.name;
+	if(Meteor.user() && Meteor.user.profile) {
+		var ts_id = TSClients.findOne(Meteor.user().profile.ts3_id);
+		if (ts_id) {
+			return ts_id.name;
+		}
 	}
 };
 
