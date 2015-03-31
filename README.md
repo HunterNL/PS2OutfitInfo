@@ -6,7 +6,7 @@ My first major Meteor app, quite a mess, but if you _really_ want to use it:
 
 ### Requirements:
 * Meteor environment (Node.js+MongoDB)
-* (Optional) PHP environment
+* (Optional) PHP environment with the [TS3 Framework](https://docs.planetteamspeak.com/ts3/php/framework/)
 * (Optional) Teamspeak 3 query permissions
 
 ### Setup:
