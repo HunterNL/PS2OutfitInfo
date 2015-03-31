@@ -1,6 +1,7 @@
 <?php
 	//Depends on TS3 PHP framework
 	require_once("TeamSpeak3.php");
+	$ts3_login_location = "../secrets/ts3_login.json";
 	header('Content-Type: application/json');
 
 	function echoAsJson($r) {
@@ -64,7 +65,7 @@
 
 
 	try {
-		$jsonString = file_get_contents("php_settings.json");
+		$jsonString = file_get_contents($ts3_login_location);
 		$jsonData = json_decode($jsonString);
 
 		$ts3_login = $jsonData->ts3_username;
